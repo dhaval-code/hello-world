@@ -6,6 +6,9 @@ def BUILD_SUCCESS=false;
 if (isPrToDevelop()) {
     //sh 'echo \"Hello Pipeline !! \"'
 }
+else {
+        sh 'echo \" Hello Pipeline!! \"'
+}
 
 pipeline {
     agent any
