@@ -11,10 +11,9 @@ else {
 }
 
 
-    stages {
         stage ('Compile Stage') {
 
-            steps {
+            node {
                 withMaven(maven : 'MAVEN_HOME') {
                     sh 'mvn clean compile'
                 }
@@ -23,7 +22,7 @@ else {
 
         stage ('Testing Stage') {
 
-            steps {
+            node {
                 withMaven(maven : 'MAVEN_HOME') {
                     sh 'mvn test'
                 }
@@ -31,7 +30,7 @@ else {
         }
                 
         stage ('sonar Stage/static analysis') {
-            steps {
+            node {
                 withSonarQubeEnv('SonarQube'){
                     sh 'pwd'
                     sh 'ls -ltr'
@@ -41,11 +40,11 @@ else {
         }
         
         stage ('Deployment Stage') {
-            steps {
+            node {
                 withMaven(maven : 'MAVEN_HOME') {
                     sh 'mvn install'
                 }
             }
         }        
-    }
+    
 
