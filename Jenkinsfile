@@ -10,6 +10,7 @@ else {
     print "No PrToDevelop"
 }
 
+try {
 stage ('Compile Stage') {
     node {
         withMaven(maven : 'MAVEN_HOME') {
@@ -17,7 +18,10 @@ stage ('Compile Stage') {
         }
     }
 }
-
+} catch (Exception exp) {
+    print "Found Exception"
+    BUILD_SUCCESS=false;
+}
 
 stage ('Testing Stage') {
     node {
