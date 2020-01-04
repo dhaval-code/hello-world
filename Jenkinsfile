@@ -4,7 +4,7 @@ def isPrToDevelop() {
 }
 def BUILD_SUCCESS=false;
 if (isPrToDevelop()) {
-    sh 'echo \"Hello Pipeline !! \"'
+    //sh 'echo \"Hello Pipeline !! \"'
 }
 pipeline {
     agent any
