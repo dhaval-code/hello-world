@@ -10,18 +10,20 @@ else {
     print "No PrToDevelop"
 }
 
-
+try {
 stage ('Compile Stage') {
-
     node {
         withMaven(maven : 'MAVEN_HOME') {
             sh 'mvn clean compile'
         }
     }
 }
-
+} catch (Exception exp) {
+    BUILD_SUCCESS=false;
+} finally {
+    print "====Finally===="
+}
 stage ('Testing Stage') {
-
     node {
         withMaven(maven : 'MAVEN_HOME') {
             sh 'mvn test'
@@ -38,7 +40,9 @@ stage ('sonar Stage/static analysis') {
         }
     }
 }
-
+if (BUILD_SUCCESS) {
+    print "Deploy Only if Build_SUCCESS"
+}
 stage ('Deployment Stage') {
     node {
         withMaven(maven : 'MAVEN_HOME') {
