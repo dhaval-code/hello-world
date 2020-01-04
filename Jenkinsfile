@@ -9,7 +9,7 @@ if (isPrToDevelop()) {
 pipeline {
     agent any
 
-    stages {
+    steps {
         stage ('Compile Stage') {
 
             node {
@@ -19,7 +19,7 @@ pipeline {
             }
         }
 
-        stage ('Testing Stage') {
+        steps ('Testing Stage') {
 
             node {
                 withMaven(maven : 'MAVEN_HOME') {
@@ -27,7 +27,7 @@ pipeline {
                 }
             }
         }
-        stage ('sonar Stage/static analysis') {
+        steps ('sonar Stage/static analysis') {
             node {
                 withSonarQubeEnv('SonarQube'){
                     sh 'pwd'
@@ -37,7 +37,7 @@ pipeline {
             }
         }
 
-        stage ('Deployment Stage') {
+        steps ('Deployment Stage') {
             node {
                 withMaven(maven : 'MAVEN_HOME') {
                     sh 'mvn install'
