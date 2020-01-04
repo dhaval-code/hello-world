@@ -10,8 +10,6 @@ else {
     print "No PrToDevelop"
 }
 
-pipeline {
-    agent any
 
     stages {
         stage ('Compile Stage') {
@@ -48,7 +46,6 @@ pipeline {
                     sh 'mvn install'
                 }
             }
-        }
-        
+        }        
     }
-}
+
