@@ -4,10 +4,10 @@ def isPrToDevelop() {
 }
 def BUILD_SUCCESS=false;
 if (isPrToDevelop()) {
-    print "isPrToDevelop"
+    //print "isPrToDevelop"
 }
 else {
-        print "No PrToDevelop"
+    //print "No PrToDevelop"
 }
 
 pipeline {
