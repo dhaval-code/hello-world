@@ -32,22 +32,22 @@ pipeline {
             }
         }
         
+        try {
         stage ('sonar Stage/static analysis') {
-            try {
-                steps {
-                    withSonarQubeEnv('SonarQube'){
-                        sh 'pwd'
-                        sh 'ls -ltr'
-                        sh 'mvn sonar:sonar -DskipTests'
-                    }
+            steps {
+                withSonarQubeEnv('SonarQube'){
+                    sh 'pwd'
+                    sh 'ls -ltr'
+                    sh 'mvn sonar:sonar -DskipTests'
                 }
+            }
+        }
             } catch (Exception exp) {
                 BUILD_SUCCESS=false;
             }
             finally {
                 print "=====Finally====="
             }
-        }
         
         stage ('Deployment Stage') {
             steps {
