@@ -4,10 +4,10 @@ def isPrToDevelop() {
 }
 def BUILD_SUCCESS=false;
 if (isPrToDevelop()) {
-    //sh 'echo \"Hello Pipeline !! \"'
+    print "isPrToDevelop"
 }
 else {
-        sh 'echo \" Hello Pipeline!! \"'
+        print "No PrToDevelop"
 }
 
 pipeline {
