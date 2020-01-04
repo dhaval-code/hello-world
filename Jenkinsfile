@@ -43,13 +43,17 @@ stage ('sonar Stage/static analysis') {
 }
 if (BUILD_SUCCESS) {
     print "Deploy Only if Build_SUCCESS"
-}
+
 stage ('Deployment Stage') {
     node {
         withMaven(maven : 'MAVEN_HOME') {
             sh 'mvn install'
         }
     }
-}        
+}
+} else {
+    print "==== Error in Pipeline ===="
+}
+
     
 
