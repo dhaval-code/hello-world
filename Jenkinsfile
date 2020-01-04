@@ -1,8 +1,7 @@
-
 pipeline {
     agent any
 
-    steps {
+    stages {
         stage ('Compile Stage') {
 
             steps {
@@ -12,7 +11,7 @@ pipeline {
             }
         }
 
-        steps ('Testing Stage') {
+        stage ('Testing Stage') {
 
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
@@ -20,7 +19,7 @@ pipeline {
                 }
             }
         }
-        steps ('sonar Stage/static analysis') {
+        stage ('sonar Stage/static analysis') {
             steps {
                 withSonarQubeEnv('SonarQube'){
                     sh 'pwd'
@@ -30,7 +29,7 @@ pipeline {
             }
         }
 
-        steps ('Deployment Stage') {
+        stage ('Deployment Stage') {
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
                     sh 'mvn install'
