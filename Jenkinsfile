@@ -1,3 +1,11 @@
+#!groovy
+def isPrToDevelop() {
+    return (env.BRANCH_NAME =~ '^PR-\\d+' &&  env.CHANGE_TARGET == 'develop')
+}
+def BUILD_SUCCESS=false;
+if (isPrToDevelop()) {
+    sh 'echo \"Hello Pipeline !! \"'
+}
 pipeline {
     agent any
 
