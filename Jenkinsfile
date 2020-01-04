@@ -22,6 +22,8 @@ pipeline {
         stage ('sonar Stage/static analysis') {
             steps {
                 withSonarQubeEnv('sonar'){
+                    sh 'pwd'
+                    sh 'ls -ltr'
                     sh 'mvn sonar:sonar -DskipTests'
                 }
             }
