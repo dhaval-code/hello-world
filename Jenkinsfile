@@ -19,7 +19,13 @@ pipeline {
                 }
             }
         }
-
+        stage ('sonar Stage/static analysis') {
+            steps {
+                withSonarQubeEnv('sonar'){
+                    sh 'mvn sonar:sonar -DskipTests'
+                }
+            }
+        }
 
         stage ('Deployment Stage') {
             steps {
@@ -28,6 +34,7 @@ pipeline {
                 }
             }
         }
+        
         stage ('upload S3') {
             steps {
                 withAWS(region:'us-east-1',credentials:awscredentials) {
