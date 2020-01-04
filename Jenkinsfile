@@ -31,22 +31,24 @@ pipeline {
                 }
             }
         }
-        try {
+        
         stage ('sonar Stage/static analysis') {
-            steps {
-                withSonarQubeEnv('SonarQube'){
-                    sh 'pwd'
-                    sh 'ls -ltr'
-                    sh 'mvn sonar:sonar -DskipTests'
+            try {
+                steps {
+                    withSonarQubeEnv('SonarQube'){
+                        sh 'pwd'
+                        sh 'ls -ltr'
+                        sh 'mvn sonar:sonar -DskipTests'
+                    }
                 }
+            } catch (Exception exp) {
+                BUILD_SUCCESS=false;
+            }
+            finally {
+                print "=====Finally====="
             }
         }
-        } catch (Exception exp) {
-            BUILD_SUCCESS=false;
-        }
-        finally {
-            print "=====Finally====="
-        }
+        
         stage ('Deployment Stage') {
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
