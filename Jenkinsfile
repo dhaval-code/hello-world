@@ -15,6 +15,7 @@ stage ('Compile Stage') {
     node {
         withMaven(maven : 'MAVEN_HOME') {
             sh 'mvn clean compile'
+            sjk
         }
     }
 }
