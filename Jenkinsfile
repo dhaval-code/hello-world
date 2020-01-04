@@ -2,12 +2,12 @@
 def isPrToDevelop() {
     return (env.BRANCH_NAME =~ '^PR-\\d+' &&  env.CHANGE_TARGET == 'develop')
 }
-def BUILD_SUCCESS=false;
+def BUILD_SUCCESS=true;
 if (isPrToDevelop()) {
-    //print "isPrToDevelop"
+    print "isPrToDevelop"
 }
 else {
-    //print "No PrToDevelop"
+    print "No PrToDevelop"
 }
 
 pipeline {
@@ -31,6 +31,7 @@ pipeline {
                 }
             }
         }
+        try {
         stage ('sonar Stage/static analysis') {
             steps {
                 withSonarQubeEnv('SonarQube'){
@@ -40,7 +41,12 @@ pipeline {
                 }
             }
         }
-
+        } catch (Exception exp) {
+            BUILD_SUCCESS=false;
+        }
+        finally {
+            print "=====Finally====="
+        }
         stage ('Deployment Stage') {
             steps {
                 withMaven(maven : 'MAVEN_HOME') {
