@@ -31,8 +31,7 @@ pipeline {
                 }
             }
         }
-        
-        try {
+                
         stage ('sonar Stage/static analysis') {
             steps {
                 withSonarQubeEnv('SonarQube'){
@@ -42,12 +41,6 @@ pipeline {
                 }
             }
         }
-            } catch (Exception exp) {
-                BUILD_SUCCESS=false;
-            }
-            finally {
-                print "=====Finally====="
-            }
         
         stage ('Deployment Stage') {
             steps {
