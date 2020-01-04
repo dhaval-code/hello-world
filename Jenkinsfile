@@ -12,7 +12,7 @@ pipeline {
     steps {
         stage ('Compile Stage') {
 
-            node {
+            steps {
                 withMaven(maven : 'MAVEN_HOME') {
                     sh 'mvn clean compile'
                 }
@@ -21,14 +21,14 @@ pipeline {
 
         steps ('Testing Stage') {
 
-            node {
+            steps {
                 withMaven(maven : 'MAVEN_HOME') {
                     sh 'mvn test'
                 }
             }
         }
         steps ('sonar Stage/static analysis') {
-            node {
+            steps {
                 withSonarQubeEnv('SonarQube'){
                     sh 'pwd'
                     sh 'ls -ltr'
@@ -38,7 +38,7 @@ pipeline {
         }
 
         steps ('Deployment Stage') {
-            node {
+            steps {
                 withMaven(maven : 'MAVEN_HOME') {
                     sh 'mvn install'
                 }
