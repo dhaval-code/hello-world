@@ -10,37 +10,6 @@ else {
     print "No PrToDevelop"
 }
 
-try {
-stage ('Compile Stage') {
-    node {
-        withMaven(maven : 'MAVEN_HOME') {
-            sh 'mvn clean compile'
-            sjk
-        }
-    }
-}
-} catch (Exception exp) {
-    print "Found Exception"
-    BUILD_SUCCESS=false;
-}
-
-stage ('Testing Stage') {
-    node {
-        withMaven(maven : 'MAVEN_HOME') {
-            sh 'mvn test'
-        }
-    }
-}
-
-stage ('sonar Stage/static analysis') {
-    node {
-        withSonarQubeEnv('SonarQube'){
-            sh 'pwd'
-            sh 'ls -ltr'
-            sh 'mvn sonar:sonar -DskipTests'
-        }
-    }
-}
 if (BUILD_SUCCESS) {
     print "Deploy Only if Build_SUCCESS"
 
