@@ -52,9 +52,11 @@ stage('ssh into server') {
             remote.user = userName
             remote.password = password            
             stage("SSH Steps") {
-                sshCommand remote: remote, command: 'whoami'
+                sh 'pwd'
+                sh 'ls -ltr'
+                //sshCommand remote: remote, command: 'whoami'
                 //writeFile file: '/webapp/target/', text: 'ls -ltr'
-                sshCommand remote: remote, command: 'pwd'
+                //sshCommand remote: remote, command: 'pwd'
                 //sshCommand remote: remote, command: 'ls -ltr'
                 //sshScript remote: remote, script: 'test.sh'
                 //sshPut remote: remote, from: 'test.sh', into: '.'
