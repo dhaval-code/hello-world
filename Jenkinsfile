@@ -2,7 +2,9 @@
 def isPrToDevelop() {
     return (env.BRANCH_NAME =~ '^PR-\\d+' &&  env.CHANGE_TARGET == 'develop')
 }
+
 def BUILD_SUCCESS=true;
+
 if (isPrToDevelop()) {
     print "isPrToDevelop"
 }
@@ -16,7 +18,7 @@ if (BUILD_SUCCESS) {
 stage ('Deployment Stage') {
     node {
         withMaven(maven : 'MAVEN_HOME') {
-            sh 'mvn install'
+            sh 'mvn clean install'
         }
     }
 }
