@@ -52,10 +52,10 @@ stage('ssh into server') {
             remote.user = userName
             remote.password = password            
             stage("SSH Steps") {
-                //writeFile file: 'test.sh', text: 'ls'
+                sshCommand remote: remote, command: 'whoami'
+                writeFile file: '/webapp/target/*.war', text: 'ls -ltr'
                 sshCommand remote: remote, command: 'pwd'
-                sshCommand remote: remote, command: 'cd /home/ansadmin/opt/tomcat'
-                sshCommand remote: remote, command: 'ls -ltr'
+                //sshCommand remote: remote, command: 'ls -ltr'
                 //sshScript remote: remote, script: 'test.sh'
                 //sshPut remote: remote, from: 'test.sh', into: '.'
                 //sshGet remote: remote, from: 'test.sh', into: 'test_new.sh', override: true
