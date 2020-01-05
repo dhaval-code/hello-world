@@ -1,3 +1,4 @@
+
 #!groovy
 def isPrToDevelop() {
     return (env.BRANCH_NAME =~ '^PR-\\d+' &&  env.CHANGE_TARGET == 'develop')
@@ -41,30 +42,5 @@ stage('Deploy - Production') {
         print '===== Deploy to Prod ====='
     }
 } */
-
-def remote = [:]
-remote.name = "centos-ansible"
-remote.host = "192.168.1.239"
-remote.allowAnyHosts = true
-stage('ssh into server') {
-    node {
-        withCredentials([usernamePassword(credentialsId: 'ansible-host', passwordVariable: 'password', usernameVariable: 'userName')]) {
-            remote.user = userName
-            remote.password = password            
-            stage("SSH Steps") {
-                sh 'pwd'
-                sh 'ls -ltr'
-                //sshCommand remote: remote, command: 'whoami'
-                //writeFile file: '/webapp/target/', text: 'ls -ltr'
-                //sshCommand remote: remote, command: 'pwd'
-                //sshCommand remote: remote, command: 'ls -ltr'
-                //sshScript remote: remote, script: 'test.sh'
-                //sshPut remote: remote, from: 'test.sh', into: '.'
-                //sshGet remote: remote, from: 'test.sh', into: 'test_new.sh', override: true
-                //sshRemove remote: remote, path: 'test.sh'
-            }
-        }
-    }
-}
     
 
