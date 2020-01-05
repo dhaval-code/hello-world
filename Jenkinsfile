@@ -48,7 +48,7 @@ remote.host = "/192.168.1.239"
 remote.allowAnyHosts = true
 stage('ssh into server') {
     node {
-        withCredentials([usernamePassword(credentialsId: 'sshUser', passwordVariable: 'password', usernameVariable: 'userName')]) {
+        withCredentials([usernamePassword(credentialsId: 'ansible-host', passwordVariable: 'password', usernameVariable: 'userName')]) {
             remote.user = userName
             remote.password = password
 
