@@ -44,7 +44,7 @@ stage('Deploy - Production') {
 
 def remote = [:]
 remote.name = "centos-ansible"
-remote.host = "/192.168.1.239"
+remote.host = "192.168.1.239"
 remote.allowAnyHosts = true
 stage('ssh into server') {
     node {
