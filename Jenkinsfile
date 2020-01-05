@@ -13,7 +13,11 @@ else {
 }
 stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
-      git 'https://github.com/dhaval-code/hello-world'
+     git(
+        url: 'https://github.com/dhaval-code/hello-world',
+        credentialsId: 'dhaval-code',
+        branch: "master"
+        )
       // Get the Maven tool.
       // ** NOTE: This 'M3' Maven tool must be configured
       // **       in the global configuration.           
