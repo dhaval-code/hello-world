@@ -38,7 +38,7 @@ stage('Sanity check') {
 stage('Deploy - Production') {
     node {
         //prod deploy steps
-        sh '===== Deploy to Prod ====='
+        print '===== Deploy to Prod ====='
     }
 }
     
