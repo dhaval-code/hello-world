@@ -20,9 +20,7 @@ stage('Preparation') { // for display purposes
 if (BUILD_SUCCESS) {
     print "Deploy Only if Build_SUCCESS"
 
-stage ('Deployment Stage') {
-    sh 'pwd'
-    sh 'ls -ltr'
+stage ('Deployment Stage') {    
     node {
         withMaven(maven : 'MAVEN_HOME') {
             sh 'mvn clean install'
