@@ -16,6 +16,7 @@ if (BUILD_SUCCESS) {
     print "Deploy Only if Build_SUCCESS"
 
 stage ('Deployment Stage') {
+    
     node {
         withMaven(maven : 'MAVEN_HOME') {
             sh 'mvn clean install'
@@ -25,6 +26,10 @@ stage ('Deployment Stage') {
 } else {
     print "==== Error in Pipeline ===="
 }
-
+    stage('Sanity check') {
+        node {
+            input "Does the staging environment look ok?"
+        }
+    }
     
 
