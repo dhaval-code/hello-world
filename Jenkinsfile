@@ -30,7 +30,7 @@ stage ('Deployment Stage') {
 } else {
     print "==== Error in Pipeline ===="
 }
-stage('Sanity check') {
+/*stage('Sanity check') {
     node {
         input "Does the staging environment look ok?"
     }
@@ -39,6 +39,28 @@ stage('Deploy - Production') {
     node {
         //prod deploy steps
         print '===== Deploy to Prod ====='
+    }
+} */
+
+def remote = [:]
+remote.name = "centos-ansible"
+remote.host = "/192.168.1.239"
+remote.allowAnyHosts = true
+stage('ssh into server') {
+    node {
+        withCredentials([usernamePassword(credentialsId: 'sshUser', passwordVariable: 'password', usernameVariable: 'userName')]) {
+            remote.user = userName
+            remote.password = password
+
+            stage("SSH Steps Rocks!") {
+                //writeFile file: 'test.sh', text: 'ls'
+                sshCommand remote: remote, command: 'pwd'
+                //sshScript remote: remote, script: 'test.sh'
+                //sshPut remote: remote, from: 'test.sh', into: '.'
+                //sshGet remote: remote, from: 'test.sh', into: 'test_new.sh', override: true
+                //sshRemove remote: remote, path: 'test.sh'
+            }
+        }
     }
 }
     
