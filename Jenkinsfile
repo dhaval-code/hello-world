@@ -11,12 +11,20 @@ if (isPrToDevelop()) {
 else {
     print "No PrToDevelop"
 }
-
+stage('Preparation') { // for display purposes
+      // Get some code from a GitHub repository
+      git 'https://github.com/dhaval-code/hello-world'
+      // Get the Maven tool.
+      // ** NOTE: This 'M3' Maven tool must be configured
+      // **       in the global configuration.           
+      mvnHome = tool 'M3'
+   }
 if (BUILD_SUCCESS) {
     print "Deploy Only if Build_SUCCESS"
 
 stage ('Deployment Stage') {
-    
+    sh 'pwd'
+    sh 'ls -ltr'
     node {
         withMaven(maven : 'MAVEN_HOME') {
             sh 'mvn clean install'
