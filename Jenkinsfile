@@ -51,10 +51,11 @@ stage('ssh into server') {
         withCredentials([usernamePassword(credentialsId: 'ansible-host', passwordVariable: 'password', usernameVariable: 'userName')]) {
             remote.user = userName
             remote.password = password
-
+            sh 'cd /opt/tomcat'
+            sh 'ls -ltr'
             stage("SSH Steps Rocks!") {
                 //writeFile file: 'test.sh', text: 'ls'
-                sshCommand remote: remote, command: 'pwd'
+                //sshCommand remote: remote, command: 'cd /opt/tomcat'
                 //sshScript remote: remote, script: 'test.sh'
                 //sshPut remote: remote, from: 'test.sh', into: '.'
                 //sshGet remote: remote, from: 'test.sh', into: 'test_new.sh', override: true
