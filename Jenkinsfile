@@ -30,10 +30,16 @@ stage ('Deployment Stage') {
 } else {
     print "==== Error in Pipeline ===="
 }
-    stage('Sanity check') {
-        node {
-            input "Does the staging environment look ok?"
-        }
+stage('Sanity check') {
+    node {
+        input "Does the staging environment look ok?"
     }
+}
+stage('Deploy - Production') {
+    node {
+        //prod deploy steps
+        sh '===== Deploy to Prod ====='
+    }
+}
     
 
