@@ -13,15 +13,9 @@ else {
 }
 stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
-     git(
-        url: 'https://github.com/dhaval-code/hello-world',
-        credentialsId: 'dhaval-code',
-        branch: "master"
-        )
-      // Get the Maven tool.
-      // ** NOTE: This 'M3' Maven tool must be configured
-      // **       in the global configuration.           
-      mvnHome = tool 'M3'
+    node {
+        checkout scm
+    }
    }
 if (BUILD_SUCCESS) {
     print "Deploy Only if Build_SUCCESS"
