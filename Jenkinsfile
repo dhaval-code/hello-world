@@ -50,10 +50,8 @@ stage('ssh into server') {
     node {
         withCredentials([usernamePassword(credentialsId: 'ansible-host', passwordVariable: 'password', usernameVariable: 'userName')]) {
             remote.user = userName
-            remote.password = password
-            //sh 'pwd'
-            //sh 'ls -ltr'
-            stage("SSH Steps Rocks!") {
+            remote.password = password            
+            stage("SSH Steps") {
                 //writeFile file: 'test.sh', text: 'ls'
                 sshCommand remote: remote, command: 'pwd'
                 sshCommand remote: remote, command: 'cd /home/ansadmin/opt/tomcat'
