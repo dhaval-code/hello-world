@@ -57,6 +57,7 @@ stage('ssh into server') {
                 //writeFile file: 'test.sh', text: 'ls'
                 sshCommand remote: remote, command: 'pwd'
                 sshCommand remote: remote, command: 'cd /opt/tomcat'
+                sshCommand remote: remote, command: 'ls -ltr'
                 //sshScript remote: remote, script: 'test.sh'
                 //sshPut remote: remote, from: 'test.sh', into: '.'
                 //sshGet remote: remote, from: 'test.sh', into: 'test_new.sh', override: true
